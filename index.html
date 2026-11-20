@@ -1,1454 +1,406 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onyinye Ukagha | PhD Chemical Engineer - Materials & Energy Innovation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #2C2C2C;
-            --accent: #8B7355;
-            --accent-light: #B69B7E;
-            --accent-dark: #6B5943;
-            --text: #2C2C2C;
-            --text-light: #6B6B6B;
-            --text-lighter: #999999;
-            --bg: #FDFCFB;
-            --bg-beige: #F5F1ED;
-            --card-bg: #FFFFFF;
-            --border: #E8E3DD;
-            --highlight: #FAF7F3;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-            overflow-x: hidden;
-            font-weight: 400;
-        }
-
-        /* Skip link (visible on keyboard focus) */
-        .skip-link {
-            position: absolute;
-            left: -999px;
-            top: 0;
-            background: #111;
-            color: #fff;
-            padding: 0.5rem 1rem;
-            z-index: 2000;
-            border-radius: 2px;
-            font-size: 0.95rem;
-            text-decoration: none;
-        }
-
-        .skip-link:focus {
-            left: 1rem;
-            top: 1rem;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(253, 252, 251, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-cv {
-            background: var(--accent);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-cv:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 8rem 2rem 4rem;
-            background: linear-gradient(to bottom, var(--bg) 0%, var(--bg-beige) 100%);
-            position: relative;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 80% 20%, rgba(139, 115, 85, 0.04) 0%, transparent 50%),
-                radial-gradient(circle at 20% 80%, rgba(139, 115, 85, 0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content {
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-subtitle {
-            font-size: 1rem;
-            color: var(--accent);
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 5vw, 5.5rem);
-            font-weight: 600;
-            color: var(--primary);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-tagline {
-            font-size: clamp(1.1rem, 2vw, 1.4rem);
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        .hero-description {
-            font-size: 1.05rem;
-            color: var(--text-light);
-            line-height: 1.9;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            font-weight: 300;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 2px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid;
-            font-size: 0.95rem;
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text);
-            border-color: var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-beige);
-            border-color: var(--accent);
-        }
-
-        /* Hero Profile Card */
-        .hero-profile {
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-        }
-
-        .profile-card {
-            background: var(--card-bg);
-            border-radius: 2px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px rgba(44, 44, 44, 0.08);
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            background: linear-gradient(135deg, var(--bg-beige) 0%, var(--highlight) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--accent);
-            border: 3px solid var(--border);
-        }
-
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-        }
-
-        .profile-initials {
-            display: none;
-            width: 100%;
-            height: 100%;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            color: var(--accent);
-            background: linear-gradient(135deg, var(--bg-beige) 0%, var(--highlight) 100%);
-            border-radius: 50%;
-        }
-
-        .profile-image.no-image .profile-initials {
-            display: flex;
-        }
-
-        .profile-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .profile-title {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-
-        .profile-location {
-            font-size: 0.9rem;
-            color: var(--text-lighter);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .profile-highlights {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .highlight-tag {
-            background: var(--bg-beige);
-            padding: 0.5rem 1rem;
-            border-radius: 2px;
-            font-size: 0.8rem;
-            color: var(--text);
-            border: 1px solid var(--border);
-            font-weight: 400;
-        }
-
-        /* Video Section */
-        .video-section {
-            background: var(--card-bg);
-            padding: 6rem 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-label {
-            font-size: 0.75rem;
-            color: var(--accent);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .section-intro {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--text-light);
-            font-size: 1.05rem;
-            font-weight: 300;
-            line-height: 1.9;
-        }
-
-        .video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 2px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(44, 44, 44, 0.1);
-            border: 1px solid var(--border);
-        }
-
-        .video-placeholder {
-            aspect-ratio: 16/9;
-            background: linear-gradient(135deg, var(--bg-beige) 0%, var(--highlight) 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: 300;
-            text-align: center;
-            padding: 3rem;
-        }
-
-        .video-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-icon:hover {
-            background: var(--accent-dark);
-            transform: scale(1.1);
-        }
-
-        /* Domains Section */
-        .domains {
-            background: var(--bg);
-            padding: 6rem 2rem;
-        }
-
-        .domains-intro {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 5rem;
-        }
-
-        .domains-intro h2 {
-            margin-bottom: 1.5rem;
-        }
-
-        .domains-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .domain-card {
-            background: var(--card-bg);
-            border-radius: 2px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(44, 44, 44, 0.06);
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-        }
-
-        .domain-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(44, 44, 44, 0.12);
-            border-color: var(--accent-light);
-        }
-
-        .domain-header {
-            padding: 3rem 2.5rem 2rem;
-            background: var(--bg-beige);
-            border-bottom: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .domain-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .domain-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .domain-subtitle {
-            font-size: 0.9rem;
-            color: var(--accent);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
-
-        .domain-content {
-            padding: 2.5rem;
-        }
-
-        .domain-description {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        .domain-skills {
-            margin-bottom: 2rem;
-        }
-
-        .domain-skills h4 {
-            font-size: 0.85rem;
-            color: var(--text);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: var(--bg-beige);
-            padding: 0.5rem 1rem;
-            border-radius: 2px;
-            font-size: 0.8rem;
-            color: var(--text);
-            border: 1px solid var(--border);
-            font-weight: 400;
-        }
-
-        .domain-applications {
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .domain-applications h4 {
-            font-size: 0.85rem;
-            color: var(--text);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .domain-applications p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        /* Impact Section */
-        .impact {
-            background: var(--card-bg);
-            padding: 6rem 2rem;
-        }
-
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .impact-stat {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: var(--bg-beige);
-            border-radius: 2px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .impact-stat:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(44, 44, 44, 0.08);
-        }
-
-        .impact-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            font-weight: 600;
-            color: var(--accent);
-            line-height: 1;
-            margin-bottom: 1rem;
-        }
-
-        .impact-label {
-            font-size: 1.1rem;
-            color: var(--text);
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .impact-detail {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        /* Projects Section */
-        .projects {
-            background: var(--bg);
-            padding: 6rem 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 2px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 20px rgba(44, 44, 44, 0.06);
-            border: 1px solid var(--border);
-        }
-
-        .project-header {
-            padding: 3rem;
-            background: var(--bg-beige);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-lighter);
-        }
-
-        .project-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.25rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .project-intro {
-            color: var(--text-light);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        .project-body {
-            padding: 3rem;
-        }
-
-        .project-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .project-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .project-section h4 {
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 1.25rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .project-section p {
-            color: var(--text-light);
-            line-height: 1.9;
-            font-weight: 300;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .result-item {
-            padding: 2rem;
-            background: var(--highlight);
-            border-radius: 2px;
-            border: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .result-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .result-label {
-            font-size: 0.95rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        /* Excellence Section */
-        .excellence {
-            background: var(--card-bg);
-            padding: 6rem 2rem;
-        }
-
-        .excellence-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 4rem;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-        }
-
-        .tab-btn:hover,
-        .tab-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-
-        .excellence-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .excellence-category {
-            display: none;
-        }
-
-        .excellence-category.active {
-            display: block;
-        }
-
-        .excellence-list {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .excellence-item {
-            padding: 2rem;
-            background: var(--bg-beige);
-            border-radius: 2px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .excellence-item:hover {
-            box-shadow: 0 8px 25px rgba(44, 44, 44, 0.08);
-            transform: translateX(5px);
-        }
-
-        .excellence-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .excellence-detail {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-            font-weight: 300;
-        }
-
-        .excellence-metric {
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--bg-beige) 0%, var(--bg) 100%);
-            padding: 8rem 2rem;
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-section h2 {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta-section p {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            margin-bottom: 3rem;
-            line-height: 1.9;
-            font-weight: 300;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            max-width: 900px;
-            margin: 4rem auto 0;
-        }
-
-        .contact-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 2px;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(44, 44, 44, 0.1);
-            border-color: var(--accent);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .contact-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            font-weight: 300;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            .hero-profile {
-                order: -1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .domains-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                padding: 6rem 1rem 3rem;
-            }
-
-            section {
-                padding: 4rem 1rem;
-            }
-
-            h2 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Onyinye Ukagha</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Onyinye Ukagha: materials scientist working across electron microscopy, X-ray diffraction and automated scientific software.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: big confident type, short lines, lots of air. Micrograph beside the name, then short scannable sections. */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --fg: #121a23;
+  --muted: #5a6773;
+  --line: #dde3e9;
+  --copper: #b4561f;
+  --cobalt: #2747a8;
+  --chip: #e8edf3;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e141a; --surface: #151d25; --fg: #eaeef2; --muted: #9aa6b2;
+    --line: #25303b; --copper: #ec8e55; --cobalt: #8aa5f5; --chip: #1c2630;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e141a; --surface: #151d25; --fg: #eaeef2; --muted: #9aa6b2;
+  --line: #25303b; --copper: #ec8e55; --cobalt: #8aa5f5; --chip: #1c2630;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1080px; margin: 0 auto; }
+a { color: var(--cobalt); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.05; margin: 0; }
+p { margin: 0; }
+.label { font: 500 0.75rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+nav .mark { font: 800 1.1rem var(--display); text-decoration: none; color: var(--fg); }
+nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+nav ul a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+nav ul a:hover { color: var(--fg); }
+@media (max-width: 640px) { nav ul { display: none; } }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 56px; align-items: center; padding-block: 72px 56px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-size: clamp(3rem, 8vw, 5.6rem); font-weight: 800; letter-spacing: -0.035em; }
+.hero h1 span { color: var(--copper); }
+.hero .role { font: 500 clamp(1.25rem, 2.6vw, 1.6rem)/1.3 var(--display); margin-top: 20px; max-width: 26ch; }
+.hero .sub { color: var(--muted); margin-top: 14px; max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 6px; font: 600 0.95rem var(--body); padding: 11px 18px; border-radius: 999px; text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn:hover { border-color: var(--copper); }
+
+figure.micro { margin: 0; }
+.micro-frame { position: relative; aspect-ratio: 1; max-width: 100%; border-radius: 6px; overflow: hidden; background: #111; }
+.micro-frame canvas { display: block; width: 100%; height: 100%; }
+.scalebar { position: absolute; left: 16px; bottom: 14px; color: #fff; font: 500 0.75rem var(--mono); display: flex; flex-direction: column; gap: 4px; text-shadow: 0 1px 2px #000; }
+.scalebar i { display: block; height: 4px; width: 25%; min-width: 64px; background: #fff; }
+.fft { position: absolute; right: 12px; top: 12px; width: 26%; aspect-ratio: 1; border: 1px solid rgba(255,255,255,.5); background: #000; }
+.fft canvas { width: 100%; height: 100%; display: block; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line); }
+.stat { padding: 22px 20px 22px 0; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+.stat .num { font: 800 clamp(2rem, 4vw, 2.8rem)/1 var(--display); font-variant-numeric: tabular-nums; color: var(--copper); letter-spacing: -0.02em; }
+.stat:nth-child(even) .num { color: var(--cobalt); }
+.stat p { font-size: 0.92rem; color: var(--muted); }
+@media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } .stat:nth-child(3) { padding-left: 0; border-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+section { padding-block: 88px 0; }
+.sec-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.sec-head h2 { font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; }
+
+/* Industries */
+.fit { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.fit div { padding: 22px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.fit h3 { font-size: 1.2rem; font-weight: 700; }
+.fit p { color: var(--muted); font-size: 0.95rem; }
+@media (max-width: 900px) { .fit { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .fit { grid-template-columns: 1fr; } }
+
+/* TRI */
+.feature { background: var(--fg); color: var(--bg); border-radius: 14px; padding: 44px; display: flex; flex-direction: column; gap: 36px; }
+.feature .label { color: color-mix(in srgb, var(--bg) 65%, var(--fg)); }
+.feature h2 { font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-top: 10px; max-width: 18ch; }
+.feature .lede { font-size: 1.15rem; max-width: 52ch; margin-top: 16px; color: color-mix(in srgb, var(--bg) 82%, var(--fg)); }
+.pipeline { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pipeline li { font: 500 0.88rem var(--mono); padding: 8px 14px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--bg) 30%, var(--fg)); }
+.pipeline li.arrow { border: 0; padding: 0; opacity: .5; }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 32px; }
+.skills-grid div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.skills-grid b { font: 700 1.05rem var(--display); }
+.skills-grid p { font-size: 0.95rem; color: color-mix(in srgb, var(--bg) 70%, var(--fg)); }
+@media (max-width: 900px) { .skills-grid { grid-template-columns: 1fr 1fr; } .feature { padding: 28px 22px; } }
+@media (max-width: 560px) { .skills-grid { grid-template-columns: 1fr; } }
+
+/* Research cards */
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.project h3 { font-size: 1.25rem; font-weight: 700; }
+.project p { color: var(--muted); }
+.project .outcome { margin-top: auto; padding-top: 10px; font: 500 0.9rem var(--mono); color: var(--copper); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font: 0.75rem var(--mono); padding: 4px 9px; border-radius: 999px; background: var(--chip); color: var(--fg); }
+@media (max-width: 700px) { .projects { grid-template-columns: 1fr; } }
+
+/* Experience */
+.job { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding-block: 26px; border-top: 1px solid var(--line); }
+.job:last-child { border-bottom: 1px solid var(--line); }
+.job > * { min-width: 0; }
+.job .when { font: 0.85rem var(--mono); color: var(--muted); }
+.job h3 { font-size: 1.3rem; font-weight: 700; }
+.job .org { color: var(--copper); font-weight: 600; margin-top: 2px; }
+.job p.what { color: var(--muted); margin-top: 8px; max-width: 62ch; }
+@media (max-width: 700px) { .job { grid-template-columns: 1fr; gap: 6px; } }
+
+/* Small lists */
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+.trio > div { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.trio ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.trio li { display: flex; flex-direction: column; }
+.trio li span { color: var(--muted); font-size: 0.92rem; }
+@media (max-width: 800px) { .trio { grid-template-columns: 1fr; gap: 32px; } }
+.skillrow { display: flex; flex-direction: column; gap: 18px; }
+
+/* Contact */
+.contact { margin-block: 96px 48px; display: flex; flex-direction: column; gap: 18px; }
+.contact h2 { font-size: clamp(2.4rem, 6vw, 4rem); font-weight: 800; letter-spacing: -0.035em; }
+.contact-rows { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.email { font: 500 1rem var(--mono); padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px; user-select: all; overflow-wrap: anywhere; }
+footer { padding-block: 0 40px; color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 36px; padding-block: 44px; }
+  figure.micro { max-width: 420px; }
+}
+</style>
 </head>
 <body>
-    <a class="skip-link" href="#about">Skip to content</a>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-name">Onyinye Ukagha</div>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#domains">Expertise</a>
-                <a href="#impact">Impact</a>
-                <a href="#projects">Projects</a>
-                <a href="#excellence">Excellence</a>
-                <a href="#contact" class="nav-cv" aria-label="Download CV">Download CV</a>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="about">
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-subtitle">PhD Chemical Engineer</div>
-                <h1>Onyinye Ukagha</h1>
-                <p class="hero-tagline">Catalysis & Process Development Specialist</p>
-                <p class="hero-description">
-                    Transforming breakthrough research into scalable industrial solutions. Proven track record at national laboratories in advanced materials, energy systems, and process optimization. Ready to drive innovation and measurable impact for industry leaders.
-                </p>
-                <div class="hero-cta">
-                    <a href="#video" class="btn btn-primary">Watch My Story</a>
-                    <a href="#contact" class="btn btn-secondary">Download CV</a>
-                    <a href="/cdn-cgi/l/email-protection#31485e44431f545c50585d715449505c415d541f525e5c" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="mark" href="#top">Onyinye Ukagha</a>
+    <ul>
+      <li><a href="#tri">Latest</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-            <div class="hero-profile">
-                <div class="profile-card">
-                    <div class="profile-image">
-                            <img src="your-photo.jpg" alt="Onyinye Ukagha — profile photo" loading="lazy" onerror="this.style.display='none'; this.parentNode.classList.add('no-image');">
-                            <span class="profile-initials" aria-hidden="true">OU</span>
-                                <!-- Replace the src above with your actual photo file (e.g. /assets/onyinye.jpg). If you add an image, keep the filename and path here or update the src attribute. -->
-                    </div>
-                    <h3 class="profile-name">Onyinye Ukagha</h3>
-                    <p class="profile-title">PhD Chemical Engineering</p>
-                    <p class="profile-location">New Orleans, LA | Open to Relocate</p>
-                    <div class="profile-highlights">
-                        <span class="highlight-tag">Catalysis</span>
-                        <span class="highlight-tag">XRD Analysis</span>
-                        <span class="highlight-tag">Process Scale-Up</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<main class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <p class="label">Materials scientist · New Orleans</p>
+      <h1 style="margin-top:14px">Onyinye<br><span>Ukagha</span></h1>
+      <p class="role">I make materials data you can trust, from atoms to automated pipelines.</p>
+      <p class="sub">Electron microscopy, X-ray diffraction and Python, at Toyota Research Institute, Argonne and Tulane.</p>
+      <div class="actions">
+        <a class="btn primary" href="#contact">Contact me</a>
+        <a class="btn" href="https://www.linkedin.com/in/cynthiaukagha/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/CynthiaUkagha" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+    <figure class="micro">
+      <div class="micro-frame">
+        <canvas id="lattice" aria-label="Animated atomic lattice, in the style of an electron micrograph" role="img"></canvas>
+        <div class="fft"><canvas id="fft" aria-hidden="true"></canvas></div>
+        <div class="scalebar"><i></i>2 nm</div>
+      </div>
+    </figure>
+  </header>
 
-    <!-- Video Section -->
-    <section class="video-section" id="video">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">90-SECOND INTRODUCTION</div>
-                <h2>My Story</h2>
-                <p class="section-intro">
-                    Who I am, what I do, and how I add value to your organization.
-                </p>
-            </div>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="90-second introduction — Onyinye Ukagha" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;min-height:360px;border:0;"></iframe>
-            </div>
-        </div>
-    </section>
+  <div class="stats" aria-label="Key results">
+    <div class="stat"><span class="num">90%</span><p>NOₓ conversion, 100 °C lower</p></div>
+    <div class="stat"><span class="num">33%</span><p>more CO₂ capture</p></div>
+    <div class="stat"><span class="num">25%</span><p>fewer component failures</p></div>
+    <div class="stat"><span class="num">4 labs</span><p>use SOPs I co-wrote</p></div>
+  </div>
 
-    <!-- Domains of Expertise -->
-    <section class="domains" id="domains">
-        <div class="domains-intro">
-            <div class="section-label">WHAT I DO</div>
-            <h2>Five Domains of Excellence</h2>
-            <p class="section-intro">
-                Comprehensive expertise spanning the entire innovation lifecycle—from fundamental research to commercial manufacturing. My work bridges science and industry, delivering solutions that work at scale.
-            </p>
-        </div>
+  <section id="fit">
+    <div class="sec-head"><p class="label">Where I fit</p><h2>One skill set, four industries</h2></div>
+    <div class="fit">
+      <div><p class="label">Semiconductors</p><h3>Failure analysis</h3><p>TEM, FIB and SEM to find root causes at the nanoscale.</p></div>
+      <div><p class="label">AI &amp; tech</p><h3>AI for science</h3><p>Tested Python pipelines, and checking AI output for correctness.</p></div>
+      <div><p class="label">Energy</p><h3>Batteries &amp; catalysts</h3><p>Degradation, emissions control and CO₂ capture.</p></div>
+      <div><p class="label">Manufacturing</p><h3>Quality &amp; process</h3><p>ISO quality systems and process work at ExxonMobil.</p></div>
+    </div>
+  </section>
 
-        <div class="domains-grid">
-            <!-- Domain 1: Energy Materials -->
-            <div class="domain-card">
-                <div class="domain-header">
-                    <span class="domain-icon">⚡</span>
-                    <h3 class="domain-title">Energy Materials & Storage</h3>
-                    <p class="domain-subtitle">Next-Generation Power Systems</p>
-                </div>
-                <div class="domain-content">
-                    <p class="domain-description">
-                        Development and optimization of advanced battery materials, fuel cells, and energy storage systems. From fundamental electrochemistry to manufacturing-ready processes.
-                    </p>
-                    
-                    <div class="domain-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            <span class="skill-tag">Electrochemistry</span>
-                            <span class="skill-tag">Battery Materials</span>
-                            <span class="skill-tag">Solid-State Systems</span>
-                            <span class="skill-tag">Fuel Cells</span>
-                            <span class="skill-tag">Performance Testing</span>
-                            <span class="skill-tag">Cycle Life Analysis</span>
-                        </div>
-                    </div>
+  <section id="tri">
+    <div class="feature">
+      <div>
+        <p class="label">Latest · Toyota Research Institute · 2026</p>
+        <h2>Automation that knows when not to trust itself</h2>
+        <p class="lede">I turned expert X-ray diffraction analysis into an automated Python workflow that checks every step and flags its own bad results.</p>
+      </div>
+      <ol class="pipeline" aria-label="Workflow steps">
+        <li>Ingest</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Gate</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Match</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Fit</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Check</li><li class="arrow" aria-hidden="true">→</li>
+        <li>Grade</li>
+      </ol>
+      <div class="skills-grid">
+        <div><b>Evaluating AI output</b><p>Tested automation against hand-made ground truth.</p></div>
+        <div><b>Reliable pipelines</b><p>Python package, unit tests, CI, versioned results.</p></div>
+        <div><b>Silent-failure hunting</b><p>Found software bugs that gave no error message.</p></div>
+        <div><b>AI coding assistants</b><p>Directed them and caught their wrong claims.</p></div>
+        <div><b>Traceable data</b><p>Every result linked to its exact code and inputs.</p></div>
+        <div><b>Teaching</b><p>Gave an in-house seminar and a staff tutorial.</p></div>
+      </div>
+    </div>
+  </section>
 
-                    <div class="domain-applications">
-                        <h4>Industry Applications</h4>
-                        <p>Tesla, Apple, QuantumScape, Solid Power, Panasonic, CATL, battery manufacturers, automotive OEMs, consumer electronics, renewable energy storage.</p>
-                    </div>
-                </div>
-            </div>
+  <section id="projects">
+    <div class="sec-head"><p class="label">Open-source projects</p><h2>Projects</h2></div>
+    <div class="projects">
+      <article class="project">
+        <div class="tags"><span class="tag">Python</span><span class="tag">TEM / STEM</span><span class="tag">Tests &amp; CI</span></div>
+        <h3>StrainScope</h3>
+        <p>Measures strain in atomic-resolution images and grades every result pass, review or fail, so a noisy image can't produce a convincing fake strain map.</p>
+        <p class="outcome"><a href="https://github.com/CynthiaUkagha/strainscope" target="_blank" rel="noopener">View code on GitHub ↗</a></p>
+      </article>
+    </div>
+  </section>
 
-            <!-- Domain 2: Advanced Materials -->
-            <div class="domain-card">
-                <div class="domain-header">
-                    <span class="domain-icon">🔬</span>
-                    <h3 class="domain-title">Advanced Materials R&D</h3>
-                    <p class="domain-subtitle">Novel Material Innovation</p>
-                </div>
-                <div class="domain-content">
-                    <p class="domain-description">
-                        Design, synthesis, and characterization of nanomaterials, composites, semiconductors, and functional coatings. Expert in translating material properties into product performance.
-                    </p>
-                    
-                    <div class="domain-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            <span class="skill-tag">Nanomaterials</span>
-                            <span class="skill-tag">XRD/SEM/TEM</span>
-                            <span class="skill-tag">Thin Films</span>
-                            <span class="skill-tag">Composites</span>
-                            <span class="skill-tag">Spectroscopy</span>
-                            <span class="skill-tag">Surface Science</span>
-                        </div>
-                    </div>
+  <section id="research">
+    <div class="sec-head"><p class="label">Graduate research · Tulane &amp; Argonne</p><h2>Research</h2></div>
+    <div class="projects">
+      <article class="project">
+        <div class="tags"><span class="tag">STEM-EELS</span><span class="tag">Synchrotron XRD</span></div>
+        <h3>Metal sites in zeolite catalysts</h3>
+        <p>Mapped copper and cobalt atoms and their oxidation states inside catalysts.</p>
+        <p class="outcome">90% NOₓ conversion, 100 °C lower</p>
+      </article>
+      <article class="project">
+        <div class="tags"><span class="tag">Cryo-FIB</span><span class="tag">Inert transfer</span></div>
+        <h3>Imaging air-sensitive materials</h3>
+        <p>A sample-prep workflow that keeps fragile materials unchanged for the microscope.</p>
+        <p class="outcome">&gt;95% chemistry retained</p>
+      </article>
+      <article class="project">
+        <div class="tags"><span class="tag">SEM</span><span class="tag">TEM</span><span class="tag">XRD</span></div>
+        <h3>How zeolite crystals grow</h3>
+        <p>Showed how the template molecule controls SSZ-39 growth and defects.</p>
+        <p class="outcome">RSC Advances · AIChE 2024 talk</p>
+      </article>
+      <article class="project">
+        <div class="tags"><span class="tag">Python</span><span class="tag">Image analysis</span></div>
+        <h3>Quantitative microscopy</h3>
+        <p>Image simulation and Fourier analysis linking defects to performance.</p>
+        <p class="outcome">33% more CO₂ capture</p>
+      </article>
+    </div>
+  </section>
 
-                    <div class="domain-applications">
-                        <h4>Industry Applications</h4>
-                        <p>Intel, Applied Materials, 3M, Corning, DuPont, semiconductor manufacturers, aerospace, advanced coatings, specialty chemicals.</p>
-                    </div>
-                </div>
-            </div>
+  <section id="experience">
+    <div class="sec-head"><p class="label">Experience</p><h2>Where I've worked</h2></div>
+    <div>
+      <div class="job">
+        <p class="when">2026</p>
+        <div><h3>Energy &amp; Materials Research Intern</h3><p class="org">Toyota Research Institute</p>
+        <p class="what">Built an automated, self-checking XRD analysis workflow in Python and took it through code review.</p></div>
+      </div>
+      <div class="job">
+        <p class="when">2022 – present</p>
+        <div><h3>Graduate Researcher</h3><p class="org">Tulane University · Argonne National Laboratory</p>
+        <p class="what">Electron microscopy and synchrotron X-ray studies of catalysts. Co-wrote SOPs now used by four labs.</p></div>
+      </div>
+      <div class="job">
+        <p class="when">2019 – 2021</p>
+        <div><h3>Quality Control &amp; Reliability Engineer</h3><p class="org">PEWCAT Limited</p>
+        <p class="what">Led QA/QC on $12M projects. Microscopy-based root-cause analysis cut failures by 25%.</p></div>
+      </div>
+      <div class="job">
+        <p class="when">2015</p>
+        <div><h3>Process &amp; Quality Engineer Intern</h3><p class="org">ExxonMobil</p>
+        <p class="what">Optimized lubricant blending with XRF and HPLC, cutting yield loss by 15%.</p></div>
+      </div>
+    </div>
+  </section>
 
-            <!-- Domain 3: Catalysis -->
-            <div class="domain-card">
-                <div class="domain-header">
-                    <span class="domain-icon">⚗️</span>
-                    <h3 class="domain-title">Catalysis & Reaction Engineering</h3>
-                    <p class="domain-subtitle">Molecular-Level Process Design</p>
-                </div>
-                <div class="domain-content">
-                    <p class="domain-description">
-                        Development of heterogeneous and homogeneous catalysts for emissions control, sustainable chemistry, and industrial synthesis. Expert in catalyst characterization and reactor design.
-                    </p>
-                    
-                    <div class="domain-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            <span class="skill-tag">Zeolite Synthesis</span>
-                            <span class="skill-tag">Catalyst Design</span>
-                            <span class="skill-tag">Reaction Kinetics</span>
-                            <span class="skill-tag">NOx Reduction</span>
-                            <span class="skill-tag">Synchrotron XRD</span>
-                            <span class="skill-tag">Active Site Analysis</span>
-                        </div>
-                    </div>
+  <section id="skills">
+    <div class="sec-head"><p class="label">Toolkit</p><h2>Skills</h2></div>
+    <div class="skillrow">
+      <div class="tags"><span class="tag">TEM / STEM</span><span class="tag">EELS / EDS</span><span class="tag">Cryo-FIB</span><span class="tag">SEM</span><span class="tag">XRD</span><span class="tag">Rietveld / Le Bail / Pawley</span><span class="tag">FT-IR</span><span class="tag">TGA / BET</span></div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">GSAS-II</span><span class="tag">Unit tests &amp; CI</span><span class="tag">Git</span><span class="tag">MATLAB</span><span class="tag">DigitalMicrograph</span><span class="tag">ImageJ</span><span class="tag">Aspen HYSYS</span></div>
+      <div class="tags"><span class="tag">Failure analysis</span><span class="tag">ISO 9001 / 14001</span><span class="tag">SOP writing</span><span class="tag">Process scale-up</span></div>
+    </div>
+  </section>
 
-                    <div class="domain-applications">
-                        <h4>Industry Applications</h4>
-                        <p>BASF, Johnson Matthey, Umicore, automotive catalysts, refining, specialty chemicals, green chemistry, emissions control.</p>
-                    </div>
-                </div>
-            </div>
+  <section>
+    <div class="trio">
+      <div><p class="label">Education</p>
+        <ul><li><b>M.Sc., Chemical &amp; Biomolecular Eng.</b><span>Tulane University</span></li>
+        <li><b>B.Eng., Chemical Engineering</b><span>Covenant University</span></li></ul></div>
+      <div><p class="label">Talks &amp; papers</p>
+        <ul><li><b>RSC Advances</b><span>Co-author, SSZ-39 formation</span></li>
+        <li><b>AIChE Annual Meeting 2024</b><span>Oral presentation</span></li>
+        <li><b>Toyota Research Institute 2026</b><span>Seminar and staff tutorial</span></li></ul></div>
+      <div><p class="label">Honors &amp; leadership</p>
+        <ul><li><b>ESA Foundation Scholar</b><span>2025</span></li>
+        <li><b>NASF &amp; WAAIME Scholar</b><span>2024</span></li>
+        <li><b>Vice President, NSBE</b><span>Tulane chapter</span></li></ul></div>
+    </div>
+  </section>
 
-            <!-- Domain 4: Process Engineering -->
-            <div class="domain-card">
-                <div class="domain-header">
-                    <span class="domain-icon">⚙️</span>
-                    <h3 class="domain-title">Process Engineering & Scale-Up</h3>
-                    <p class="domain-subtitle">Lab to Manufacturing Excellence</p>
-                </div>
-                <div class="domain-content">
-                    <p class="domain-description">
-                        Chemical process design, optimization, and commercialization. Bridging research breakthroughs with manufacturing reality through systematic scale-up and techno-economic analysis.
-                    </p>
-                    
-                    <div class="domain-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            <span class="skill-tag">Process Design</span>
-                            <span class="skill-tag">Aspen HYSYS</span>
-                            <span class="skill-tag">Scale-Up</span>
-                            <span class="skill-tag">Pilot Plant</span>
-                            <span class="skill-tag">Techno-Economics</span>
-                            <span class="skill-tag">Process Safety</span>
-                        </div>
-                    </div>
+  <section class="contact" id="contact">
+    <p class="label">Contact</p>
+    <h2>Let's work together.</h2>
+    <div class="contact-rows">
+      <span class="email" id="email">onyinyeukagha@gmail.com</span>
+      <button class="btn" type="button" id="copy-email">Copy email</button>
+      <a class="btn" href="https://www.linkedin.com/in/cynthiaukagha/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/CynthiaUkagha" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </section>
 
-                    <div class="domain-applications">
-                        <h4>Industry Applications</h4>
-                        <p>Dow, LyondellBasell, ExxonMobil, Chevron, chemical manufacturing, refining, pharmaceuticals, specialty chemicals, process industries.</p>
-                    </div>
-                </div>
-            </div>
+  <footer>© 2026 Onyinye Ukagha</footer>
+</main>
 
-            <!-- Domain 5: Sustainability -->
-            <div class="domain-card">
-                <div class="domain-header">
-                    <span class="domain-icon">🌱</span>
-                    <h3 class="domain-title">Sustainability & Clean Technology</h3>
-                    <p class="domain-subtitle">Circular Economy Solutions</p>
-                </div>
-                <div class="domain-content">
-                    <p class="domain-description">
-                        Carbon capture, waste-to-value conversion, green chemistry, and lifecycle analysis. Aligning environmental goals with economic viability through innovative process design.
-                    </p>
-                    
-                    <div class="domain-skills">
-                        <h4>Core Competencies</h4>
-                        <div class="skills-list">
-                            <span class="skill-tag">Carbon Capture</span>
-                            <span class="skill-tag">Green Chemistry</span>
-                            <span class="skill-tag">Waste Valorization</span>
-                            <span class="skill-tag">LCA</span>
-                            <span class="skill-tag">H2 Production</span>
-                            <span class="skill-tag">Circular Economy</span>
-                        </div>
-                    </div>
+<script>
+(function () {
+  var btn = document.getElementById('copy-email');
+  btn.addEventListener('click', function () {
+    var el = document.getElementById('email');
+    function select() { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; }
+    try { navigator.clipboard.writeText(el.textContent).then(function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy email'; }, 1600); }, select); } catch (e) { select(); }
+  });
 
-                    <div class="domain-applications">
-                        <h4>Industry Applications</h4>
-                        <p>All major manufacturers pursuing sustainability goals, carbon-intensive industries, renewable energy, waste management, green hydrogen, ESG-focused companies.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Impact Section -->
-    <section class="impact" id="impact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">PROVEN RESULTS</div>
-                <h2>Quantified Impact</h2>
-                <p class="section-intro">
-                    Numbers that demonstrate research excellence, innovation capacity, and readiness for industry leadership.
-                </p>
-            </div>
-
-            <div class="impact-grid">
-                <div class="impact-stat">
-                    <div class="impact-number">X+</div>
-                    <div class="impact-label">Publications</div>
-                    <div class="impact-detail">Peer-reviewed research in top-tier journals</div>
-                </div>
-
-                <div class="impact-stat">
-                    <div class="impact-number">Y+</div>
-                    <div class="impact-label">Citations</div>
-                    <div class="impact-detail">Impact on the scientific community</div>
-                </div>
-
-                <div class="impact-stat">
-                    <div class="impact-number">Z</div>
-                    <div class="impact-label">Patents</div>
-                    <div class="impact-detail">Filed/granted intellectual property</div>
-                </div>
-
-                <div class="impact-stat">
-                    <div class="impact-number">A+</div>
-                    <div class="impact-label">Collaborations</div>
-                    <div class="impact-detail">National lab & industry partnerships</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">FLAGSHIP WORK</div>
-                <h2>Project Showcase</h2>
-                <p class="section-intro">
-                    Detailed case studies demonstrating problem-solving methodology, technical depth, and measurable results.
-                </p>
-            </div>
-
-            <!-- Project Template -->
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-meta">
-                        <span>📍 National Laboratory Partnership</span>
-                        <span>⏱️ 2022-2024</span>
-                        <span>🎯 Catalysis & Emissions Control</span>
-                    </div>
-                    <h3 class="project-title">Cu-SSZ-39 Zeolite Catalysts for NOx Reduction</h3>
-                    <p class="project-intro">
-                        Development of advanced zeolite-based catalysts for automotive emissions control, achieving superior NOx reduction efficiency and thermal stability.
-                    </p>
-                </div>
-
-                <div class="project-body">
-                    <div class="project-section">
-                        <h4>The Challenge</h4>
-                        <p>
-                            Automotive manufacturers needed catalysts capable of meeting increasingly stringent emissions standards while maintaining performance under harsh operating conditions (high temperatures, thermal cycling, and chemical poisoning). Existing catalysts degraded rapidly, leading to compliance failures and increased costs.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>My Approach</h4>
-                        <p>
-                            Designed and synthesized novel Cu-exchanged SSZ-39 zeolite catalysts using advanced characterization techniques (synchrotron XRD, in-situ spectroscopy) to understand structure-activity relationships. Optimized synthesis parameters through systematic DOE (Design of Experiments) methodology. Conducted pilot-scale testing to validate commercial viability.
-                        </p>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Quantified Results</h4>
-                        <div class="results-grid">
-                            <div class="result-item">
-                                <div class="result-value">45%</div>
-                                <div class="result-label">NOx Reduction Improvement</div>
-                            </div>
-                            <div class="result-item">
-                                <div class="result-value">$2.1M</div>
-                                <div class="result-label">Estimated Cost Savings</div>
-                            </div>
-                            <div class="result-item">
-                                <div class="result-value">2</div>
-                                <div class="result-label">Patents Filed</div>
-                            </div>
-                            <div class="result-item">
-                                <div class="result-value">3</div>
-                                <div class="result-label">Publications</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-section">
-                        <h4>Transferable Impact</h4>
-                        <p>
-                            <strong>For Automotive/Catalyst Companies:</strong> This methodology directly improves emissions control systems, helping meet EPA/CARB standards while reducing catalyst costs and extending service life.<br><br>
-                            
-                            <strong>For Chemical Manufacturers:</strong> The zeolite synthesis and characterization framework accelerates development of selective catalysts for petrochemicals, refining, and specialty chemicals.<br><br>
-                            
-                            <strong>For Research Organizations:</strong> Advanced characterization techniques and structure-activity correlation methods applicable to any heterogeneous catalyst system.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Read More -->
-            <div style="text-align: center; padding: 3rem; background: var(--bg-beige); border-radius: 2px; margin-top: 2rem; border: 1px solid var(--border);">
-                <p style="font-family: 'Montserrat', sans-serif; color: var(--text-light); font-weight: 300; font-size: 0.95rem; margin-bottom: 1.75rem;">
-                    Explore the full portfolio — spanning catalysis, energy materials, process scale-up, and sustainability.
-                </p>
-                <a href="projects/" class="btn btn-primary" style="text-decoration: none;">View All Projects →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Excellence Section -->
-    <section class="excellence" id="excellence">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-label">CREDENTIALS</div>
-                <h2>Academic & Research Excellence</h2>
-                <p class="section-intro">
-                    Comprehensive record of publications, patents, awards, and professional certifications.
-                </p>
-            </div>
-
-            <div class="excellence-tabs">
-                <button class="tab-btn active" onclick="showTab('publications', event)">Publications</button>
-                <button class="tab-btn" onclick="showTab('patents', event)">Patents & IP</button>
-                <button class="tab-btn" onclick="showTab('awards', event)">Awards & Honors</button>
-                <button class="tab-btn" onclick="showTab('certifications', event)">Certifications</button>
-            </div>
-
-            <div class="excellence-content">
-                <!-- Publications Tab -->
-                <div class="excellence-category active" id="publications">
-                    <div class="excellence-list">
-                        <div class="excellence-item">
-                            <div class="excellence-title">First-Author: Advanced Zeolite Catalysts for Emissions Control</div>
-                            <div class="excellence-detail">Journal of Catalysis, 2024</div>
-                            <div class="excellence-metric">Citations: 25 | Impact Factor: 7.3</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Co-Author: Structural Insights into Active Sites using Synchrotron XRD</div>
-                            <div class="excellence-detail">ACS Catalysis, 2023</div>
-                            <div class="excellence-metric">Citations: 42 | Impact Factor: 13.1</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Conference Proceeding: Scale-Up of Catalyst Synthesis</div>
-                            <div class="excellence-detail">AIChE Annual Meeting, 2023</div>
-                            <div class="excellence-metric">Oral Presentation</div>
-                        </div>
-                        <!-- Add your actual publications -->
-                    </div>
-                </div>
-
-                <!-- Patents Tab -->
-                <div class="excellence-category" id="patents">
-                    <div class="excellence-list">
-                        <div class="excellence-item">
-                            <div class="excellence-title">Novel Zeolite Catalyst Composition for NOx Reduction</div>
-                            <div class="excellence-detail">US Patent Application #XXXXXXXX</div>
-                            <div class="excellence-metric">Filed: 2024 | Status: Under Review</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Method for Synthesis of Thermally Stable Catalysts</div>
-                            <div class="excellence-detail">US Patent #YYYYYYYY</div>
-                            <div class="excellence-metric">Granted: 2023</div>
-                        </div>
-                        <!-- Add your actual patents -->
-                    </div>
-                </div>
-
-                <!-- Awards Tab -->
-                <div class="excellence-category" id="awards">
-                    <div class="excellence-list">
-                        <div class="excellence-item">
-                            <div class="excellence-title">NSF Graduate Research Fellowship</div>
-                            <div class="excellence-detail">National Science Foundation</div>
-                            <div class="excellence-metric">$XXX,XXX Award | 2020-2023</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Best Paper Award</div>
-                            <div class="excellence-detail">International Catalysis Conference</div>
-                            <div class="excellence-metric">2023</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Outstanding Graduate Researcher</div>
-                            <div class="excellence-detail">Department of Chemical Engineering</div>
-                            <div class="excellence-metric">2022</div>
-                        </div>
-                        <!-- Add your actual awards -->
-                    </div>
-                </div>
-
-                <!-- Certifications Tab -->
-                <div class="excellence-category" id="certifications">
-                    <div class="excellence-list">
-                        <div class="excellence-item">
-                            <div class="excellence-title">Six Sigma Green Belt</div>
-                            <div class="excellence-detail">Process Optimization & Quality Management</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Project Management Professional (PMP)</div>
-                            <div class="excellence-detail">PMI Certified</div>
-                        </div>
-                        <div class="excellence-item">
-                            <div class="excellence-title">Advanced Characterization Techniques</div>
-                            <div class="excellence-detail">XRD, SEM, TEM, Spectroscopy Certification</div>
-                        </div>
-                        <!-- Add your actual certifications -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-content">
-            <div class="section-label">LET'S CONNECT</div>
-            <h2>Ready to Discuss How I Can Contribute</h2>
-            <p>
-                Whether you're developing next-generation materials, optimizing manufacturing processes, or tackling sustainability challenges, let's explore how my expertise can drive measurable results for your organization.
-            </p>
-
-            <div class="cta-buttons">
-                <a href="YOUR_CV.pdf" download class="btn btn-primary">Download Full CV</a>
-                <a href="/cdn-cgi/l/email-protection#583736213136213d2d33393f3039183f35393134763b3735" class="btn btn-secondary">Send Email</a>
-            </div>
-
-            <div class="contact-grid">
-                <a href="/cdn-cgi/l/email-protection#ef8081968681968a9a848e88878eaf88828e8683c18c8082cf8c838e9c9cd2" contact-card">
-                    <div class="contact-icon">✉️</div>
-                    <div class="contact-label">Email</div>
-                </a>
-                <a href="https://www.linkedin.com/in/cynthiaukagha/" class="contact-card" target="_blank" rel="noopener noreferrer">
-                    <div class="contact-icon">💼</div>
-                    <div class="contact-label">LinkedIn</div>
-                </a>
-                <a href="https://wa.me/YOUR_NUMBER" class="contact-card" target="_blank" rel="noopener noreferrer">
-                    <div class="contact-icon">💬</div>
-                    <div class="contact-label">WhatsApp</div>
-                </a>
-                <a href="tel:YOUR_PHONE" class="contact-card">
-                    <div class="contact-icon">📱</div>
-                    <div class="contact-label">Phone</div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 Onyinye Ukagha | PhD Chemical Engineering | New Orleans, LA</p>
-    </footer>
-
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        function showTab(tabName, evt) {
-            // Hide all tabs
-            document.querySelectorAll('.excellence-category').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            // Show selected tab
-            const tab = document.getElementById(tabName);
-            if (tab) tab.classList.add('active');
-            if (evt && evt.target) evt.target.classList.add('active');
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.domain-card, .impact-stat, .project-card, .
+  var cv = document.getElementById('lattice'), ctx = cv.getContext('2d');
+  var fv = document.getElementById('fft'), fx = fv.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N = 220, img = ctx.createImageData(N, N);
+  cv.width = N; cv.height = N;
+  var a = 15.5, angle = 0.32, ca = Math.cos(angle), sa = Math.sin(angle);
+  var noise = new Float32Array(N * N);
+  for (var i = 0; i < noise.length; i++) noise[i] = Math.random();
+  function draw(t) {
+    var dx = Math.sin(t / 4000) * 1.5, dy = Math.cos(t / 5200) * 1.5, d = img.data;
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+      var X = x + dx, Y = y + dy, u = (X * ca + Y * sa) / a, v = (-X * sa + Y * ca) / a;
+      var w = v + 0.5 * u, fu = u - Math.round(u), fw = w - Math.round(w);
+      var gu = u + 0.5 - Math.round(u + 0.5), gw = w + 0.5 - Math.round(w + 0.5);
+      var vign = 1 - 0.35 * (((x - N / 2) ** 2 + (y - N / 2) ** 2) / (N * N / 2));
+      var val = (Math.exp(-(fu * fu + fw * fw) / 0.03) * 0.85 + Math.exp(-(gu * gu + gw * gw) / 0.02) * 0.35) * vign;
+      var n = noise[(y * N + x + ((t / 90) | 0)) % noise.length];
+      var g = Math.max(0, Math.min(255, 30 + val * 200 + (n - 0.5) * 38)), k = (y * N + x) * 4;
+      d[k] = g; d[k + 1] = g; d[k + 2] = g * 1.04; d[k + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  (function () {
+    var S = 120; fv.width = S; fv.height = S; fx.fillStyle = '#000'; fx.fillRect(0, 0, S, S);
+    var c = S / 2, g = fx.createRadialGradient(c, c, 0, c, c, 14);
+    g.addColorStop(0, 'rgba(255,255,255,.9)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    fx.fillStyle = g; fx.fillRect(0, 0, S, S);
+    for (var h = -2; h <= 2; h++) for (var l = -2; l <= 2; l++) {
+      if (!h && !l) continue;
+      var px = h * 17, py = (l - 0.5 * h) * 17, X = c + px * ca - py * sa, Y = c + px * sa + py * ca;
+      if (X < 4 || Y < 4 || X > S - 4 || Y > S - 4) continue;
+      var b = 1 / (Math.abs(h) + Math.abs(l));
+      fx.fillStyle = 'rgba(255,255,255,' + (0.35 + 0.6 * b) + ')'; fx.beginPath(); fx.arc(X, Y, 1.8 + b * 1.6, 0, 7); fx.fill();
+    }
+  })();
+  draw(0);
+  if (!reduce) { var last = 0; (function loop(t) { if (t - last > 60) { draw(t); last = t; } requestAnimationFrame(loop); })(0); }
+})();
+</script>
+</body>
+</html>
